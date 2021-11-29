@@ -2,6 +2,7 @@ package yarieva.pages;
 
 import com.codeborne.selenide.SelenideElement;
 import com.github.javafaker.Faker;
+import com.github.javafaker.PhoneNumber;
 import yarieva.pages.components.CalendarComponent;
 
 import java.util.Locale;
@@ -20,7 +21,7 @@ public class RegistrationsPage {
             lastNameInput = $("#lastName"),
             resultsTable = $(".table-responsive"),
            emailInput = $("#userEmail"),
-    genderRadioButton=$("#genterWrapper").$(byText("Female")),
+    genderRadioButton=$("#genterWrapper"),
     phoneNumberInput=$("#userNumber"),
     subjectInput=$("#subjectsInput"),
     hobbiesCheckBox=$("#hobbiesWrapper"),
@@ -31,11 +32,10 @@ public class RegistrationsPage {
     submitButton=$("#submit");
 
 
-
     public CalendarComponent calendar = new CalendarComponent();
 
 
-  // Faker faker = new Faker(new Locale("ru"));
+   Faker faker = new Faker(new Locale("ru"));
 
     // actions
     public RegistrationsPage openPage() {
@@ -45,37 +45,44 @@ public class RegistrationsPage {
         return this;
     }
 
-    public RegistrationsPage typeFirstName(String value) {
-       firstNameInput.setValue(value);
 
-        return this;
-    }
+     public RegistrationsPage typeFirstName() {
+
+         String firstName = faker.name().firstName();
+         firstNameInput.setValue(firstName);
+       return this;
+     }
 
 
-    public RegistrationsPage typeLastName(String value) {
-        lastNameInput.setValue(value);
+    public RegistrationsPage typeLastName() {
+
+        String lastName = faker.name().lastName();
+        lastNameInput.setValue(lastName);
         return this;
     }
 
     public  RegistrationsPage typeEmail(String value) {
-        emailInput.setValue(value);
+       emailInput.setValue(value);
+
         return this;
     }
 
     public RegistrationsPage choseGender(String value) {
-genderRadioButton.click();
+genderRadioButton.$(byText(value)).click();
 return this;
     }
 
-    public RegistrationsPage typePhoneNumber(String value) {
-phoneNumberInput.setValue(value);
+    public RegistrationsPage typePhoneNumber() {
+//phoneNumberInput.setValue(value);
+        String phoneNumber = faker.phoneNumber().phoneNumber();
+       phoneNumberInput.setValue(phoneNumber);
 return this;
     }
 
-   // public RegistrationsPage choeseDateOfBirh (String day, String month, String year) {
-   //    calendar.setDate(10, 9, 2007);
-    //   return this;
-  //  }
+    public RegistrationsPage chooseDateOfBirth (String day, String month, String year) {
+       calendar.setDate(day, month, year);
+       return this;
+   }
 
     public  RegistrationsPage chooseSubject(String value) {
 subjectInput.setValue(value).pressEnter();
@@ -91,7 +98,9 @@ return this;
         return this;
     }
     public  RegistrationsPage typeCurrentAddress(String value) {
-currentAddress.setValue(value);
+//currentAddress.setValue(value);
+        String streetAddress = faker.address().streetAddress();
+        currentAddress.setValue(streetAddress);
 return  this;
     }
 

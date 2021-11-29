@@ -1,26 +1,27 @@
 package yarieva.test;
 
+import com.github.javafaker.Faker;
 import org.junit.jupiter.api.Test;
-import yarieva.pages.components.CalendarComponent;
 
-import java.io.File;
+import java.util.Locale;
 
 import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Selectors.byText;
+
 import static com.codeborne.selenide.Selenide.$;
 
 public class StudentsRegistrationWithPageObjectsTests extends TestBase {
 
-    public CalendarComponent calendar = new CalendarComponent();
+    Faker faker = new Faker(new Locale("ru"));
 
     @Test
     void fillFormTest() {
         registrationsPage.openPage()
-                .typeFirstName("Mira")
-                .typeLastName("Smith")
-       .typeEmail("Mira@mail.ru")
+                .typeFirstName()
+                .typeLastName()
+                .typeEmail("Mira@mail.ru")
       .choseGender("Female")
-       .typePhoneNumber("79802507861")
+       .typePhoneNumber()
+        .chooseDateOfBirth("10", "September","2007")
         .chooseSubject("Hindi")
         .chooseHobbies("Music")
         .uploadPicture("img/JoyCorp.jpg")
@@ -28,13 +29,6 @@ public class StudentsRegistrationWithPageObjectsTests extends TestBase {
         .chooseState("Haryana")
         .chooseCity("Karnal")
         .clickSubmit();
-        registrationsPage.calendar.setDate("10", "September", "2007");
-
-
-     //   $("#uploadPicture").uploadFile(new File("src/test/resources/img/JoyCorp.png"));
-    //    $("#uploadPicture").uploadFromClasspath("img/1.png");
-
-
 
         $("#submit").click();
 
