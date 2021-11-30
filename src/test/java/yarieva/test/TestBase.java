@@ -1,8 +1,8 @@
 package yarieva.test;
 
 import com.codeborne.selenide.Configuration;
-import yarieva.pages.RegistrationsPage;
 import org.junit.jupiter.api.BeforeAll;
+import yarieva.pages.RegistrationsPage;
 
 public class TestBase {
 
@@ -10,7 +10,8 @@ public class TestBase {
 
     @BeforeAll
     static void beforeAll() {
-        Configuration.startMaximized = true;
+        Configuration.browserSize = "2048x1153";
+        Configuration.baseUrl = "https://demoqa.com";
     }
 
 }

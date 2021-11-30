@@ -4,8 +4,8 @@ import com.codeborne.selenide.SelenideElement;
 
 import static com.codeborne.selenide.Selenide.$;
 
-public class CalendarComponent  {
-    private SelenideElement dateInput = $("#dateOfBirthInput");
+public class CalendarComponent {
+    private final SelenideElement dateInput = $("#dateOfBirthInput");
 
     public void setDate(String day, String month, String year) {
         dateInput.click();
