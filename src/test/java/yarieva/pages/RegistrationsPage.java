@@ -1,11 +1,9 @@
 package yarieva.pages;
 
 import com.codeborne.selenide.SelenideElement;
-import com.github.javafaker.Faker;
 import yarieva.pages.components.CalendarComponent;
 
 import java.io.File;
-import java.util.Locale;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byText;
@@ -16,28 +14,24 @@ import static com.codeborne.selenide.Selenide.open;
 public class RegistrationsPage {
     // locators & elements
     private final String FORM_TITLE = "Student Registration Form";
+
+    private SelenideElement
+            formTitle = $(".practice-form-wrapper"),
+            firstNameInput = $("#firstName"),
+            lastNameInput = $("#lastName"),
+            resultsTable = $(".table-responsive"),
+            emailInput = $("#userEmail"),
+            genderRadioButton = $("#genterWrapper"),
+            phoneNumberInput = $("#userNumber"),
+            subjectInput = $("#subjectsInput"),
+            hobbiesCheckBox = $("#hobbiesWrapper"),
+            pictureButton = $("#uploadPicture"),
+            currentAddress = $("#currentAddress"),
+            stateDropDownList = $("#state"),
+            cityDropDownList = $("#city"),
+            submitButton = $("#submit");
+
     public CalendarComponent calendar = new CalendarComponent();
-    Faker faker = new Faker(new Locale("en"));
-    public String firstName = faker.name().firstName();
-    public String lastName = faker.name().lastName();
-    public String email = faker.internet().emailAddress();
-    public String streetAddress = faker.address().streetAddress();
-    public String phone = faker.phoneNumber().subscriberNumber(10);
-    private final SelenideElement
-            formTitle = $(".practice-form-wrapper");
-    private final SelenideElement firstNameInput = $("#firstName");
-    private final SelenideElement lastNameInput = $("#lastName");
-    private final SelenideElement resultsTable = $(".table-responsive");
-    private final SelenideElement emailInput = $("#userEmail");
-    private final SelenideElement genderRadioButton = $("#genterWrapper");
-    private final SelenideElement phoneNumberInput = $("#userNumber");
-    private final SelenideElement subjectInput = $("#subjectsInput");
-    private final SelenideElement hobbiesCheckBox = $("#hobbiesWrapper");
-    private final SelenideElement pictureButton = $("#uploadPicture");
-    private final SelenideElement currentAddress = $("#currentAddress");
-    private final SelenideElement stateDropDownList = $("#state");
-    private final SelenideElement cityDropDownList = $("#city");
-    private final SelenideElement submitButton = $("#submit");
 
     // actions
     public RegistrationsPage openPage() {
@@ -48,28 +42,28 @@ public class RegistrationsPage {
     }
 
 
-    public RegistrationsPage typeFirstName() {
+    public RegistrationsPage typeFirstName(String firstName) {
         firstNameInput.setValue(firstName);
         return this;
     }
 
 
-    public RegistrationsPage typeLastName() {
+    public RegistrationsPage typeLastName(String lastName) {
         lastNameInput.setValue(lastName);
         return this;
     }
 
-    public RegistrationsPage typeEmail() {
+    public RegistrationsPage typeEmail(String email) {
         emailInput.setValue(email);
         return this;
     }
 
-    public RegistrationsPage choseGender(String value) {
-        genderRadioButton.$(byText(value)).click();
+    public RegistrationsPage choseGender(String gender) {
+        genderRadioButton.$(byText(gender)).click();
         return this;
     }
 
-    public RegistrationsPage typePhoneNumber() {
+    public RegistrationsPage typePhoneNumber(String phone) {
         phoneNumberInput.setValue(phone);
         return this;
     }
@@ -79,36 +73,36 @@ public class RegistrationsPage {
         return this;
     }
 
-    public RegistrationsPage chooseSubject(String value) {
-        subjectInput.setValue(value).pressEnter();
+    public RegistrationsPage chooseSubject(String subject) {
+        subjectInput.setValue(subject).pressEnter();
         return this;
     }
 
-    public RegistrationsPage chooseHobbies(String value) {
-        hobbiesCheckBox.$(byText(value)).click();
+    public RegistrationsPage chooseHobbies(String hobbies) {
+        hobbiesCheckBox.$(byText(hobbies)).click();
         return this;
     }
 
-    public RegistrationsPage uploadPicture(String value) {
-        pictureButton.uploadFile(new File(value));
+    public RegistrationsPage uploadPicture(String picture) {
+        pictureButton.uploadFile(new File(picture));
         return this;
     }
 
-    public RegistrationsPage typeCurrentAddress() {
+    public RegistrationsPage typeCurrentAddress(String streetAddress) {
 
         currentAddress.setValue(streetAddress);
         return this;
     }
 
-    public RegistrationsPage chooseState(String value) {
+    public RegistrationsPage chooseState(String state) {
         stateDropDownList.click();
-        $("#stateCity-wrapper").$(byText((value))).click();
+        $("#stateCity-wrapper").$(byText((state))).click();
         return this;
     }
 
-    public RegistrationsPage chooseCity(String value) {
+    public RegistrationsPage chooseCity(String city) {
         cityDropDownList.click();
-        $("#stateCity-wrapper").$(byText(value)).click();
+        $("#stateCity-wrapper").$(byText(city)).click();
         return this;
     }
 
